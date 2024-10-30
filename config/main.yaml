@@ -1,0 +1,22 @@
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+defaults:
+  - process: process1
+  - model: model1
+  - _self_
+
+data:
+  raw:
+    path: data/raw/heart.csv
+    input: data/raw/input.csv
+    output: data/raw/output.csv
+  processed:
+    path: data/processed
+    train_features: data/processed/train_features.csv
+    train_labels: data/processed/train_labels.csv
+    test_features: data/processed/test_features.csv
+    test_labels: data/processed/test_labels.csv
+  final: data/final/final.csv

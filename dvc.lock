@@ -1,0 +1,104 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/data.py
+    deps:
+    - path: config/main.yaml
+      hash: md5
+      md5: 0039ca58fceab867ad61dfcf3cb0a51f
+      size: 486
+    - path: data/raw
+      hash: md5
+      md5: cdbc623bbc7fc3e714c639df4d2629e8.dir
+      size: 22602
+      nfiles: 4
+    - path: src/data.py
+      hash: md5
+      md5: 578e90d5d3148b73c60a44058a618264
+      size: 571
+  preprocess_data:
+    cmd: python src/process.py
+    deps:
+    - path: config/main.yaml
+      hash: md5
+      md5: 0039ca58fceab867ad61dfcf3cb0a51f
+      size: 486
+    - path: data/raw/input.csv
+      hash: md5
+      md5: f101640815ea8fb3c02aae1ff571bb98
+      size: 10666
+    - path: data/raw/output.csv
+      hash: md5
+      md5: 37058d60b55f431eabaa72dffbc836d2
+      size: 613
+    - path: src/process.py
+      hash: md5
+      md5: f789f6fa59b1a9247c35a1b0f33631e9
+      size: 1125
+    outs:
+    - path: data/processed/test_features.csv
+      hash: md5
+      md5: 435f21f6a03031964c09a05447935c67
+      size: 15660
+    - path: data/processed/test_labels.csv
+      hash: md5
+      md5: 46f7c9c34140eb3e000817f582731e8f
+      size: 129
+    - path: data/processed/train_features.csv
+      hash: md5
+      md5: feff23e617551b5ad3e05b166c6c0480
+      size: 61911
+    - path: data/processed/train_labels.csv
+      hash: md5
+      md5: b52d0707ccbc69046cb8abecfe8634c6
+      size: 491
+    - path: models/scaler.joblib
+      hash: md5
+      md5: eeb70329c51f9600d4ac0f65786968e3
+      size: 1359
+  train:
+    cmd: python src/train_model.py
+    deps:
+    - path: config/main.yaml
+      hash: md5
+      md5: 0039ca58fceab867ad61dfcf3cb0a51f
+      size: 486
+    - path: data/processed
+      hash: md5
+      md5: c8738c8db67153305f394962a7adfabb.dir
+      size: 78191
+      nfiles: 5
+    - path: src/train_model.py
+      hash: md5
+      md5: 4d4a896dff3851e8e11cbf0ee91f86c9
+      size: 700
+    outs:
+    - path: models/log_reg.joblib
+      hash: md5
+      md5: ed1b2c33cf9ca71555755b3787827e6d
+      size: 1435
+  test:
+    cmd: python src/test_model.py
+    deps:
+    - path: config/main.yaml
+      hash: md5
+      md5: 0039ca58fceab867ad61dfcf3cb0a51f
+      size: 486
+    - path: data/processed
+      hash: md5
+      md5: c8738c8db67153305f394962a7adfabb.dir
+      size: 78191
+      nfiles: 5
+    - path: models/log_reg.joblib
+      hash: md5
+      md5: ed1b2c33cf9ca71555755b3787827e6d
+      size: 1435
+    - path: src/test_model.py
+      hash: md5
+      md5: 1963ffd15c5a4417501574686ea81793
+      size: 941
+    outs:
+    - path: metrics/log_reg_metrics.json
+      hash: md5
+      md5: 8f2e22568e4a45d664419e4142c70215
+      size: 64
