@@ -1,2 +1,4 @@
-['remote "my_remote"']
-    url = s3://my-dvc-bucket-001
+[core]
+    remote = my_remote_rep
+['remote "my_remote_rep"']
+    url = s3://my-dvc-bucket-001/Data/
