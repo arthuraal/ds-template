@@ -3,7 +3,6 @@ import pandas as pd
 from joblib import dump
 from omegaconf import DictConfig
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
 
 
 @hydra.main(config_path="../config", config_name="main", version_base=None)
@@ -15,8 +14,8 @@ def train_model(config: DictConfig):
     model = LogisticRegression(solver="liblinear")
     model.fit(X_train, y_train.to_numpy().ravel())
 
-    print(f"Save model into models/")
-    dump(model, 'models/log_reg.joblib')
+    print("Save model into models/")
+    dump(model, "models/log_reg.joblib")
 
 
 if __name__ == "__main__":
